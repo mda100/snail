@@ -14,6 +14,7 @@ node_id = getrandbits(160).to_bytes(20, byteorder)
 info_hash = bytes.fromhex("F5E058892444A1464367AFB1876DE80D68A085DE") #avatar way of water
 K = 8 # this is inconsistent, better to dynamically calculate 
 MAX_PEERS = 20
+TIMEOUT = 0.2
 s = socket(AF_INET, SOCK_DGRAM)
 BOOTSTRAP_NODES = [(gethostbyname("dht.libtorrent.org"), 25401), 
 (gethostbyname("router.bittorrent.com"), 6881), 
@@ -111,7 +112,7 @@ def get_peers_query(node: Node, query: bytes = query) -> None:
 
 def get_peers_query_bootstrap(address: tuple, query: bytes = query) -> None:
     try:
-        s.settimeout(1)
+        s.settimeout(TIMEOUT)
         s.sendto(query, address)
         r = s.recvfrom(1024)
         get_peers_utility(r)
