@@ -143,6 +143,6 @@ while len(peers_table) < MAX_PEERS:
     if i%10 == 0:
         print('peers table at iteration ', i, ' :\n', peers_table)
 
-print(peers_table)
-print(i)
+print('peers table:\n', peers_table)
+print('total numer of iterations: ', i)
 s.close()
