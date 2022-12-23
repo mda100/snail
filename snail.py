@@ -10,8 +10,10 @@ from typing import List
 
 ## GLOBALS ##
 
+#magnet:?xt=urn:btih:D7F1A872C0A936F2E79DAD3060DB6D72A90BCB55&dn=Spider-Man+No+Way+Home+%282021%29+1080p+CAM+NO+ADS+Includes+Both+POS&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.dler.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fopentracker.i2p.rocks%3A6969%2Fannounce&tr=udp%3A%2F%2F47.ip-51-68-199.eu%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.internetwarriors.net%3A1337%2Fannounce&tr=udp%3A%2F%2F9.rarbg.to%3A2920%2Fannounce&tr=udp%3A%2F%2Ftracker.pirateparty.gr%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.cyberia.is%3A6969%2Fannounce
+
 node_id = getrandbits(160).to_bytes(20, byteorder)
-info_hash = bytes.fromhex("5A6194C4E92A459A1313B7A4E9F7A9EB18FB9205")
+info_hash = bytes.fromhex("D7F1A872C0A936F2E79DAD3060DB6D72A90BCB55")
 K = 8 # this is inconsistent, better to dynamically calculate 
 s = socket(AF_INET, SOCK_DGRAM)
 BOOTSTRAP_NODES = [(gethostbyname("dht.libtorrent.org"), 25401), 
@@ -21,12 +23,15 @@ BOOTSTRAP_NODES = [(gethostbyname("dht.libtorrent.org"), 25401),
 (gethostbyname("dht.aelitis.com"), 6881)
 ]
 
+
+## data ##
+
 new_nodes = []
-routing_table = []  # so the "routing table i'm mainting is different then the query table "
+routing_table = []  # so the "routing table i'm maintaining is different then the query table "
 peers_table = []
 
 
-## data ##
+## utilities ##
 
 def distance(node: bytes, target: bytes = info_hash) -> int:
     return int.from_bytes(node, 'big')^int.from_bytes(target, 'big')
@@ -179,3 +184,11 @@ s.close()
 
 ### ok yeah so it converges on a number and then is hitting the same ones and then keeps adding peers
 ### how to terminate ?
+
+
+## how did i write this? should this be my side project or something else ##
+
+
+### hmm it looks like this works still! if i get bored i can copy this folder, chop this up into components i understand with a little better
+## design pattern and cleaner code then extend this to do the handshake i think
+## this is a sick project 
