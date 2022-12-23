@@ -13,6 +13,7 @@ from typing import List
 node_id = getrandbits(160).to_bytes(20, byteorder)
 info_hash = bytes.fromhex("F5E058892444A1464367AFB1876DE80D68A085DE") #avatar way of water
 K = 8 # this is inconsistent, better to dynamically calculate 
+MAX_PEERS = 20
 s = socket(AF_INET, SOCK_DGRAM)
 BOOTSTRAP_NODES = [(gethostbyname("dht.libtorrent.org"), 25401), 
 (gethostbyname("router.bittorrent.com"), 6881), 
@@ -133,12 +134,14 @@ routing_table.extend(new_nodes)
 new_nodes.clear()
 
 i = 0
-while len(peers_table) < 20:
+while len(peers_table) < MAX_PEERS:
     one_pass()
     routing_table.extend(new_nodes)
     routing_table = update_routing_table()
     new_nodes.clear()
     i+=1
+    if i%10 == 0:
+        print('peers table at iteration ', i, ' :\n', peers_table)
 
 print(peers_table)
 print(i)
