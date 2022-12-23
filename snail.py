@@ -10,10 +10,8 @@ from typing import List
 
 ## GLOBALS ##
 
-#magnet:?xt=urn:btih:D7F1A872C0A936F2E79DAD3060DB6D72A90BCB55&dn=Spider-Man+No+Way+Home+%282021%29+1080p+CAM+NO+ADS+Includes+Both+POS&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.dler.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fopentracker.i2p.rocks%3A6969%2Fannounce&tr=udp%3A%2F%2F47.ip-51-68-199.eu%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.internetwarriors.net%3A1337%2Fannounce&tr=udp%3A%2F%2F9.rarbg.to%3A2920%2Fannounce&tr=udp%3A%2F%2Ftracker.pirateparty.gr%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.cyberia.is%3A6969%2Fannounce
-
 node_id = getrandbits(160).to_bytes(20, byteorder)
-info_hash = bytes.fromhex("D7F1A872C0A936F2E79DAD3060DB6D72A90BCB55")
+info_hash = bytes.fromhex("F5E058892444A1464367AFB1876DE80D68A085DE") #avatar way of water
 K = 8 # this is inconsistent, better to dynamically calculate 
 s = socket(AF_INET, SOCK_DGRAM)
 BOOTSTRAP_NODES = [(gethostbyname("dht.libtorrent.org"), 25401), 
@@ -27,7 +25,7 @@ BOOTSTRAP_NODES = [(gethostbyname("dht.libtorrent.org"), 25401),
 ## data ##
 
 new_nodes = []
-routing_table = []  # so the "routing table i'm maintaining is different then the query table "
+routing_table = []  # the routing table i'm maintaining is different then the query table
 peers_table = []
 
 
@@ -51,7 +49,6 @@ class Node:
 
     def __repr__(self):
         return 'id: %s\naddress: %s\ndistance: %s\nalive: %s' % (self.id, self.address, self.closeness, self.alive)
-
 
 
 ### GET PEERS QUERY  ###
