@@ -71,6 +71,7 @@ query = encode(get_peers)
 
 # returns updated COPY of routing table
 # removes "dead" nodes, duplicates, sorts by distance, prunes top K closest
+
 def update_routing_table(routing_table: list = routing_table) -> list:
     return sorted(list(set([node for node in routing_table if node.alive])), key=lambda node: node.closeness)[:K]
 
@@ -99,7 +100,6 @@ def get_peers_utility(r: bytes) -> None:
         print(e)
         
 ## QUERY FUNCTIONS ## 
-# there's some redundancy here, but i can worry about abstraction later
 
 def get_peers_query(node: Node, query: bytes = query) -> None:
     try:
@@ -146,49 +146,3 @@ while len(peers_table) < 20:
 print(peers_table)
 print(i)
 s.close()
-
-## 100 is too many -> smarter !
-## this is a solid working example
-## i should rewrite this in cython
-## refactor it to be simpler and more efficient
-## take care of use cases and errors
-## once this is a tight module ill be gucci 
-## i'm not going to add seeding -> making a mobile p2p file sharer is enoguh work 
-
-##  read through issues on open source bittorrents 
-## a more intelligent way to do this is to "find_node" until K=20 nodes that have no closer distance 
-## no that's not it - there IS a smarter way to terminate this, but rn # limit it! 
-
-# i truly don't know hwy it gets caught in a loop   
-# maybe i slice the nodes to 64 but i only do a pass on the first 8 -> that way if they time out no problem
-
-## it's converging to one number which isn't great 
-## do i have any peers??? -> maybe that is the closest distance ??
-## as soon as i have a terminating condition i have my minimum working example for the crawler
-## at that point i can clean up this file and make it robust 
-## maybe rewrite in cython
-## and port into a new file 
-## work on the handshake until i download 
-## then make this very basic backage very robust 
-## then work on link opening, a web server, a mobile app , etc. 
-
-## yeah it's converging so my first question is -> do peers exist ?? maybe this IS the closest number 
-
-## do the 64 -> 8 thing
-## if it's getting stuck in a loop -> the 8 closest reference eachother or something
-## maybe hve a 
-
-## OH SHIT YEAH BB WE GOT PEERS
-## NOPE IT GOES ON AND ON BC NO TERMINATING CONDIITON WE GOT PEERS
-
-
-### ok yeah so it converges on a number and then is hitting the same ones and then keeps adding peers
-### how to terminate ?
-
-
-## how did i write this? should this be my side project or something else ##
-
-
-### hmm it looks like this works still! if i get bored i can copy this folder, chop this up into components i understand with a little better
-## design pattern and cleaner code then extend this to do the handshake i think
-## this is a sick project 
