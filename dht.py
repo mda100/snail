@@ -14,6 +14,7 @@ TIMEOUT = 0.1
 # TODO: protocol for node joining the DHT and staying alive, provividing info 
 # TODO: ensure good error logging and handling, dry simple code
 # TODO: create test cases, set up github actions
+# TODO: make the node requests asynchronous 
 
 class Node:
     def __init__ (self, buffer: bytearray) -> None:
